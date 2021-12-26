@@ -11,7 +11,7 @@ function EventItem(props) {
   const humanReadableDate = new Date(date).toLocaleDateString('en-IN');
   return (
     <li className={classes.item}>
-      <img src={image} alt={title}></img>
+      <img src={'/' + image} alt={title}></img>
       <div className={classes.content}>
         <div>
           <h2>{title}</h2>
