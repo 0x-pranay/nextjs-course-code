@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import classes from './newsletter-registration.module.css';
 
 function NewsletterRegistration() {
-  const [email, setEmail] = useState(null);
+  // const [email, setEmail] = useState(null);
 
-  function onChangeEmail(e) {
-    if (e.target.validity.valid) {
-      console.log('On change: ', e.target.value);
-      setEmail(e.target.value);
-    }
-  }
+  // function onChangeEmail(e) {
+  //   if (e.target.validity.valid) {
+  //     console.log('On change: ', e.target.value);
+  //     setEmail(e.target.value);
+  //   }
+  // }
+
+  const emailRef = useRef();
 
   async function registrationHandler(event) {
     event.preventDefault();
+    const email = emailRef.current.value;
     console.log('Form submitted', email);
 
     const res = await fetch('/api/newsletter', {
@@ -40,7 +43,8 @@ function NewsletterRegistration() {
             id='email'
             placeholder='Your email'
             aria-label='Your email'
-            onChange={onChangeEmail}
+            // onChange={onChangeEmail}
+            ref={emailRef}
           />
           <button>Register</button>
         </div>

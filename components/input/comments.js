@@ -11,7 +11,7 @@ function Comments(props) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
 
-  const { data, error } = useSWR('/api/comments');
+  const { data, error } = useSWR(`/api/comments/${eventId}`);
 
   useEffect(() => {
     if (data) {
@@ -28,13 +28,17 @@ function Comments(props) {
   }
 
   function addCommentHandler(commentData) {
-    fetch('/api/comments', {
+    fetch(`/api/comments/${eventId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(commentData),
+    }).then(async (response) => {
+      const data = await response.json();
+      console.log(data);
     });
+    // .then((data) => console.log(data));
     // send data to API
   }
 
